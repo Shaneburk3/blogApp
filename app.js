@@ -3,6 +3,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require('body-parser');
+const session = require('express-session');
+
 
 // require database for sqlite3
 const sqlite3 = require('sqlite3').verbose();
@@ -46,7 +48,7 @@ app.use('/users', userRouter);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-/*
+
 app.use(
     session({
         secret: 'secret_key', 
@@ -54,7 +56,7 @@ app.use(
         saveUninitialized: false,
     })
 );
-*/
+
 
 app.get('/', (req, res) => {
     res.render('index.ejs')

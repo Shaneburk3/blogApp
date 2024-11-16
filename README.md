@@ -10,3 +10,4 @@ express ejs
 body-parser
 nodemon
 sqlite3
+express-session
