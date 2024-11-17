@@ -1,14 +1,15 @@
-const db = require('../DB/database');
+const db = require('../db');
 
-const getUserByUsername = (username, callback) => {
-    db.get('SELECT * FROM users WHERE username = ?', [username], callback);
+const User = {
+    create: (data, callback) => {
+        console.log('Creating user...')
+        const {first_name, last_name, username, email, password} = data;
+        console.log(data);
+        db.run('INSERT INTO users (first_name, last_name, username, password, email) VALUES (?,?,?,?,?)', [first_name, last_name, username, password, email], callback);
+    },
+    findByUsername: (username, callback) => {
+        db.get('SELECT * FROM users WHERE username = ?', [username], callback);
+},
 };
 
-//create a user
-const createUser = (userData, callback) => {
-    const { first_name, last_name, username, password, email } = userData;
-    db.run('INSERT INTO users (first_name, last_name, username, password, email) VALUES (?,?,?,?,?)', [first_name, last_name, username, password, email], callback
-    );
-};
-
-module.exports = {getUserByUsername, createUser};
+module.exports = User;

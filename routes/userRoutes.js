@@ -1,13 +1,11 @@
 const express = require('express');
-const router = express.Router()
-const db = require('../DB/database.js');
+const router = express.Router();
+const userController = require('../controllers/userController');
 
-router.get('/', (req, res) => {
-    res.send('Send in users');
-});
+router.get('/register', (req, res) => res.render('users/register'));
+router.post('/register', userController.register);
 
-router.post('/register', async (req, res) => {
-    const { first_name, last_name, username, password, email} = req.body;
-})
+router.get('/login', (req, res) => res.render('users/login'));
+router.post('/login', userController.login);
 
-module.exports = router
+module.exports = router;

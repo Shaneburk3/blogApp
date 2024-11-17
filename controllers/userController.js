@@ -1,23 +1,28 @@
-const {getUserByUsername, createUser } = require('../models/userModel');
+const User = require('../models/userModel');
+const db = require('../db');
 
-const registerUser = (req, res) => {
-    const { first_name, last_name, username, password, email } = req.body;
-    createUser({first_name, last_name, username, password, email}, (err) => {
-        if (err) return res.status(500).send('Error registering');
+exports.register = (req, res) => {
+    User.create(req.body, (err) => {
+        if (err) return res.send('Error creating user');
         res.redirect('/login');
-    })
-} ;
+    });
+};
 
-const loginUser = (req, res) => {
-    const {username, password } = req.body;
-
-    getUserByUsername(username, (err, user) => {
-        if (err || !user || password !== user.password) {
-            return res.status(401).send('invalid.');
+exports.login = (req, res) => {
+    const {username, password} = req.body;
+    console.log('Username:', req.body)
+    User.findByUsername(username, (err, user) => {
+        console.log('Found user:', user)
+        if (err) {
+            return res.send('Error.');
+        } else if (!user) {
+            return res.send('Not a user.');
+        } else if (user.password !== password) {
+            return res.send('Invalid password.');
         }
-        req.session.user = user;
+        console.log('Match, logged in');
+        req.session.userId = user.id;
+        //console.log('Session ID:', req.session);
         res.redirect('/blogs');
-    })
-}
-
-module.exports = { registerUser, loginUser };
+    });
+};

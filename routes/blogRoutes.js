@@ -1,8 +1,15 @@
 const express = require('express');
-const router = express.Router()
+const router = express.Router();
+const blogController = require('../controllers/blogController');
 
-router.get('/', (req, res) => {
-    res.send('Send in blogs');
-})
+router.get('/', blogController.renderBlogs);
+router.get('/blogs', blogController.getAllBlogs);
 
-module.exports = router
+
+router.post('/create', blogController.createBlog);
+
+router.get('/:id', blogController.getBlog);
+router.post('/:id/edit', blogController.updateBlog);
+router.post('/:id/deleteBlog', blogController.deleteBLog);
+
+module.exports = router;
