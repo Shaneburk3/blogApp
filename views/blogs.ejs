@@ -6,47 +6,44 @@
     <h1 id="Hello">All blogs</h1>
 
     <form action="/blogs/create" method="POST">
-
         <div class="form-group">
-          <label for="title">Title</label>
-          <input type="title" name="title" class="form-control" id="title" aria-describedby="title" placeholder="Enter title" required>
+            <label for="title">Title</label>
+            <input type="title" name="title" class="form-control" id="title" aria-describedby="title" placeholder="Enter title" required>
         </div>
-      <div class="form-group">
-        <label for="body">Body</label>
-        <textarea type="textarea" name="body" class="form-control" id="body" placeholder="Body" required></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Create</button>
+        <div class="form-group">
+            <label for="body">Body</label>
+            <textarea type="textarea" name="body" class="form-control" id="body" placeholder="Body" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
     </form>
 
-    <ul>
-        <% blogs.forEach(blog => { %>
-            <li>
-                <h2><a href="/blogs/<%= blog.id%>"><%=blog.title%></a></h2>
-                <p><% blog.body %></p>
-    </ul>
-
-    <!-- Update blog  -->
-     <form action="/blogs/update" method="POST">
-        <div class="form-group">
-            <input type="hidden" name="id" value="<% blog.id %>" class="form-control" aria-describedby="blog_id">
-            <input type="text" name="title" value="<% blog.title %>" required>
-            <textarea name="body" required><% blog.body %></textarea>
-          </div>
-          <button type="submit">Update</button>
-     </form>
-
-         <!-- delete blog  -->
-         <form action="/blogs/delete" method="POST">
+    <% blogs.forEach(blog => { %>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title"><%=blog.title%></h5>
+            <p class="card-text"><%= blog.body %></p>
+            <a href="/blogs/<%= blog.id%>" class="card-link">blog link</a>
+        </div>
+        <!-- Update blog  -->
+        <form class="card" style="width: 18rem;" action="/blogs/update" method="POST">
             <div class="form-group">
-                <input type="hidden" name="id" value="<% blog.id %>" class="form-control" aria-describedby="blog_id">
-              </div>
-              <button type="submit">Delete</button>
-         </form>
-        </li>
-         <% }); %>
-    </ul>
-    <a href="/">Homepage</a>
+                <input class="list-group-item" type="hidden" name="id" value="<% blog.id %>" class="form-control" aria-describedby="blog_id">
+                <input class="list-group-item" type="text" name="title" value="<% blog.title %>" required>
+                <textarea name="body" required><% blog.body %></textarea>
+            </div>
+            <button type="submit">Update</button>
+        </form>
 
+        <!-- delete blog  -->
+        <form class="card" style="width: 18rem;" action="/blogs/delete" method="POST">
+            <div class="form-group">
+                <input class="list-group-item" type="hidden" name="id" value="<% blog.id %>" class="form-control" aria-describedby="blog_id">
+            </div>
+            <button class="list-group-item" type="submit">Delete</button>
+        </form>
+        <% }); %>
+        </div>
+    </div>
 
     <%- include ("partials/footer.ejs") %>   
 </body>

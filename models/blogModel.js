@@ -1,5 +1,4 @@
 const db = require('../db');
-let sqlCreateBlog;
 
 const Blog = {
     create: (data, callback) => {
