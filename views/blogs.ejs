@@ -15,10 +15,11 @@
             <textarea type="textarea" name="body" class="form-control" id="body" placeholder="Body" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Create</button>
+        <br>
     </form>
 
     <% blogs.forEach(blog => { %>
-    <div class="card" style="width: 18rem;">
+    <div class="card>
         <div class="card-body">
             <h5 class="card-title"><%=blog.title%></h5>
             <p class="card-text"><%= blog.body %></p>
@@ -42,8 +43,8 @@
             <button class="list-group-item" type="submit">Delete</button>
         </form>
         <% }); %>
-        </div>
     </div>
+
 
     <%- include ("partials/footer.ejs") %>   
 </body>
