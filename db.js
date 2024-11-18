@@ -7,6 +7,11 @@ let admin_user = 'admin'
 
 
 db.serialize(() => {
+
+    //clear all entries.
+    db.run('DROP TABLE IF EXISTS users');
+    db.run('DROP TABLE IF EXISTS blogs');
+
     db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, first_name TEXT NOT NULL, last_name TEXT NOT NULL, username TEXT UNIQUE NOT NULL, email TEXT NOT NULL, password TEXT NOT NULL, role TEXT DEFAULT' + 'user'+' )');
 
     db.run('CREATE TABLE IF NOT EXISTS blogs (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT null, body TEXT NOT null, user_id INTEGER NOT NULL, FOREIGN KEY (user_id) REFERENCES users (id))');
@@ -16,7 +21,5 @@ db.serialize(() => {
     db.run('INSERT INTO users (first_name, last_name, username, email, password) VALUES (?,?,?,?,?)', ["admin", "admin", "admin", "admin@email.com", "123"]);
 
     db.run('INSERT INTO blogs (title, body, user_id) VALUES (?,?,?)', ["my first blog", "body", 1])});
-
-
 
 module.exports = db;
