@@ -4,25 +4,26 @@ const db = require('../db');
 exports.register = (req, res) => {
     User.create(req.body, (err) => {
         if (err) return res.send('Error creating user');
+        console.log('User created: ', req.body);
         res.redirect('/login');
     });
 };
 
 exports.login = (req, res) => {
-    const {username, password} = req.body;
+    const {username, password} = req.body; 
     console.log('Username:', req.body)
     User.findByUsername(username, (err, user) => {
-        console.log('Found user:', user)
         if (err) {
-            return res.send('Error.');
+            return res.send('Error.', err.message);
         } else if (!user) {
-            return res.send('Not a user.');
+            return res.send('User not found.');
         } else if (user.password !== password) {
             return res.send('Invalid password.');
         }
+        const session_id = req.session.userId = user.id;
+        console.log('Found user:', user)
         console.log('Match, logged in');
-        req.session.userId = user.id;
-        //console.log('Session ID:', req.session);
+        console.log('Session ID:', session_id);
         res.redirect('/blogs');
     });
 };

@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const session = require('express-session');
-
 app.use(session({
         secret: 'secret_key', 
         resave: false, 
@@ -12,12 +11,14 @@ app.use(session({
     })
 );
 
+app.use(express.static(__dirname + '/'));
+
+
 // parse application
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-//const User = require('../blogApp/controllers/userController')
 
 // require database for sqlite3
 const sqlite3 = require('sqlite3').verbose();
@@ -27,6 +28,7 @@ const blogRoutes = require('../blogApp/routes/blogRoutes');
 
 app.use('/users', userRoutes);
 app.use('/blogs', blogRoutes);
+
 
 
 //connect to db
@@ -41,11 +43,10 @@ const db = new sqlite3.Database('./database.db', sqlite3.OPEN_READWRITE, (err) =
 
 module.exports = db;
 
-//const session = require('express-session');
-
 //routes to blog and user.
 const blogRouter = require('./routes/blogRoutes');
 const userRouter = require('./routes/userRoutes');
+
 //const { KeyObject } = require('crypto');
 
 

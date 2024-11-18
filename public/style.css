@@ -1,9 +1,22 @@
+body {
+    padding-bottom: 125px;
+    display: flexbox;
+    flex-direction: column;
+    
+}
 #Hello {
     color: blue;
 }
 
 .footer {
-    position:absolute;
-    width:100%;
-    bottom:0px;
-}
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+ }
+
+ #blog_card {
+    display: inline-block;
+    background-color: rgb(235, 245, 245);
+    width: 40rem; margin: 30px;
+ }

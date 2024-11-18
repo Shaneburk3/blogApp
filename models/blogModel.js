@@ -1,8 +1,8 @@
 const db = require('../db');
 
 const Blog = {
-    create: (data, callback) => {
-        const { title, body, user_id} = data;
+    create: (title, body, user_id, callback) => {
+        //const {title, body, user_id} = data;
         db.run('INSERT INTO blogs (title, body, user_id) VALUES (?,?,?)', [title, body, user_id], callback);
     },
     findAll: (id, callback) => {

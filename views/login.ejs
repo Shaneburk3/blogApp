@@ -3,20 +3,23 @@
     <%- include ("partials/head.ejs") %>
 <body>
     <%- include ("partials/nav.ejs") %>
-    <h1 id="Hello">Sign In World</h1>
+    <h1 id="Hello" class="display-4" >Sign In</h1>
 
-    <form action="/users/login" method="POST">
-
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="username" name="username" class="form-control" id="username" aria-describedby="username" placeholder="Enter Username" required>
-          </div>
+    <div class="card" style="width: 40rem; padding: 30px;">
+      <form action="/users/login" method="POST">
         <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+          <label for="username">Username</label>
+          <input type="username" name="username" class="form-control" id="username" aria-describedby="username" placeholder="Enter Username" required>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+        
+    </div>
+
 
     <%- include ("partials/footer.ejs") %>   
 </body>
