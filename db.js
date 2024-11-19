@@ -11,7 +11,7 @@ let user_user = 'user'
 db.serialize(() => {
     //clear all entries.
     db.run('DROP TABLE IF EXISTS users');
-    db.run('DROP TABLE IF EXISTS blogs')
+    db.run('DROP TABLE IF EXISTS blogs');
 
     db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, first_name TEXT NOT NULL, last_name TEXT NOT NULL, username TEXT UNIQUE NOT NULL, email TEXT NOT NULL, password TEXT NOT NULL, role TEXT DEFAULT' + 'user'+' )');
 

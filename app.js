@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 const session = require('express-session');
+//session keys to track user activity
 app.use(session({
         secret: 'secret_key', 
         resave: false, 
@@ -44,8 +45,8 @@ const db = new sqlite3.Database('./database.db', sqlite3.OPEN_READWRITE, (err) =
 module.exports = db;
 
 //routes to blog and user.
-const blogRouter = require('./routes/blogRoutes');
-const userRouter = require('./routes/userRoutes');
+//const blogRouter = require('./routes/blogRoutes');
+//const userRouter = require('./routes/userRoutes');
 
 //const { KeyObject } = require('crypto');
 

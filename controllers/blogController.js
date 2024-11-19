@@ -13,7 +13,7 @@ exports.renderBlogs = (req, res) => {
       return res.status(500).send('error loading users blogs.');
     }
     //success
-    res.render('blogs', {blogs, user_id: req.session.userId });
+    res.render('blogs', {blogs});
   })
 }
 /*
