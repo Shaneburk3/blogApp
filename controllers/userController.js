@@ -14,7 +14,7 @@ exports.login = (req, res) => {
     console.log('Username:', req.body)
     User.findByUsername(username, (err, user) => {
         if (err) {
-            return res.send('Error.', err.message);
+            return res.send('Error.');
         } else if (!user) {
             return res.send('User not found.');
         } else if (user.password !== password) {
