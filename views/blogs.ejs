@@ -30,7 +30,7 @@
             <div class="form-group">
                 <input class="list-group-item" type="hidden" name="id" value="<%= blog.id %>" class="form-control" aria-describedby="blog_id">
                 <input class="list-group-item" type="text" name="title" value="<%= blog.title %>" required>
-                <textarea name="body"><% blog.body %></textarea>
+                <textarea name="body"><%= blog.body %></textarea>
             </div>
             <button type="submit">Update</button>
         </form>
@@ -44,6 +44,8 @@
         </form>
     </div>
     <% }); %>
+
+
 
 
     <%- include ("partials/footer.ejs") %>   

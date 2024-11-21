@@ -17,13 +17,14 @@ exports.renderBlogs = (req, res) => {
   })
 }
 
+/*
 exports.getAllBlogs = (req, res) => {
   Blog.findAll((err, blogs) => {
     if (err) return res.send('Error getting blogs');
     res.render('/blogs,', {blogs});
   });
 };
-
+*/
 exports.createBlog = (req, res) => {
   let userId = req.session.userId;
   

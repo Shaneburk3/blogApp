@@ -1,5 +1,6 @@
 const db = require('../db');
 
+
 const User = {
     create: (data, callback) => {
         console.log('Creating user...')

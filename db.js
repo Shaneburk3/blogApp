@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const db =  new sqlite3.Database('database.db');
 const path = require('path');
 
-const dbPath = path.resolve(__dirname, './database.db');
+//const dbPath = path.resolve(__dirname, './database.db');
 let admin_user = 'admin'
 
 
@@ -20,6 +20,7 @@ db.serialize(() => {
 
     db.run('INSERT INTO users (first_name, last_name, username, email, password) VALUES (?,?,?,?,?)', ["admin", "admin", "admin", "admin@email.com", "123"]);
 
-    db.run('INSERT INTO blogs (title, body, user_id) VALUES (?,?,?)', ["my first blog", "body", 1])});
+    db.run('INSERT INTO blogs (title, body, user_id) VALUES (?,?,?)', ["my first blog", "body", 1])
+});
 
 module.exports = db;
