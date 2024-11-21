@@ -1,13 +1,18 @@
 const User = require('../models/userModel');
 const db = require('../db');
+const { body, validationResult } = require('express-validator');
 
-exports.register = (req, res) => {
+exports.register = ([body('first_name').notEmpty(), body('last_name').notEmpty(), body('usernname').notEmpty(), body('email').isEmail().withMessage('Must be an email.'), body('password').isLength({ min: 6 }).withMessage('Must be min 6 chars.')], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) { return res.render('/register', { errors: errors.array() } );
+    }
     User.create(req.body, (err) => {
         if (err) return res.send('Error creating user');
         console.log('User created: ', req.body);
         res.redirect('/login');
     });
-};
+
+});
 
 exports.login = (req, res) => {
     const {username, password} = req.body; 

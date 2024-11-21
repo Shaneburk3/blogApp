@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const blogController = require('../controllers/blogController');
+const { body, validationResult } = require('express-validator');
 
+// trim input, .escape() special characters eliminates XSS attacks
 router.get('/', blogController.renderBlogs);
 router.get('/blogs', blogController.renderBlogs);
 
