@@ -57,6 +57,12 @@ app.set('view engine', 'ejs');
 app.use('/users', userRoutes);
 app.use('/blogs', blogRoutes);
 
+
+app.post('test/clear', async (req, res) => {
+    await db.run('DELETE * FROM users');
+    res.send('DB Cleared.');
+});
+
 app.get('/', (req, res) => {
     res.render('index.ejs')
 });

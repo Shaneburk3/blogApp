@@ -28,10 +28,22 @@ npm install ejs
 npm install express-session
 npm install body-parser
 npm install sqlite3
-npm install playwright
 npx install nodemon
+
+## SECURITY FEATURES
 npm install express-validator
 npm install bcrypt
+
+# PLAYWRIGHT TESTING
+npm install playwright
+npx playwright install
+
+## RUN TESTS 
+
+npm test
+
+npx playwright test tests/register.spec.js
+npx playwright test tests/login.spec.js
 
 ## Start Application
 

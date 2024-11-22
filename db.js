@@ -17,8 +17,8 @@ db.serialize(() => {
     db.run('CREATE TABLE IF NOT EXISTS blogs (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT null, body TEXT NOT null, user_id INTEGER NOT NULL, FOREIGN KEY (user_id) REFERENCES users (id))');
 
     db.run('DELETE FROM users WHERE username = (?)', [admin_user]);
-
-    db.run('INSERT INTO users (first_name, last_name, username, email, password) VALUES (?,?,?,?,?)', ["admin", "admin", "admin", "admin@email.com", "123"]);
+    //hashed password: Password12
+    db.run('INSERT INTO users (first_name, last_name, username, email, password) VALUES (?,?,?,?,?)', ["admin", "admin", "admin", "admin@email.com", "$2b$10$22TnFkO8rYI7xCWNAWcfTO2TF3yasArmsdCKHUYtFCXrhehQelCza"]);
 
     db.run('INSERT INTO blogs (title, body, user_id) VALUES (?,?,?)', ["my first blog", "body", 1])
 });
