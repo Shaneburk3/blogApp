@@ -11,7 +11,7 @@ exports.register = (req, res) => {
 
 exports.login = (req, res) => {
     const {username, password} = req.body; 
-    console.log('Username:', req.body)
+    console.log('User:', req.body)
     User.findByUsername(username, (err, user) => {
         if (err) {
             return res.send('Error.');
