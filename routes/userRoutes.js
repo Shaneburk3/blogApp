@@ -14,7 +14,7 @@ router.post('/register', [
     body('email').isEmail().withMessage('Must be an email.').escape(), 
     body('password').isLength({ min: 6 }).withMessage('Must be min 6 chars.').isLength({ max: 30}).withMessage("Too Long.")], userController.registerValidate);
 
-router.get('/login', (req, res) => res.render('users/login'));
+router.get('/login', (req, res) => res.render('users/login', {errors: null}));
 
 router.post('/login', [body('username').escape().isLength({max: 20}),
     body('password').isLength({ min: 6 }).withMessage('Must be min 6 chars.').isLength({ max: 30}).withMessage("Too Long.")

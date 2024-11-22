@@ -30,6 +30,8 @@ npm install body-parser
 npm install sqlite3
 npm install playwright
 npx install nodemon
+npm install express-validator
+npm install bcrypt
 
 ## Start Application
 
