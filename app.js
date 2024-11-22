@@ -12,6 +12,7 @@ app.use(session({
     })
 );
 
+//directory resolver.
 app.use(express.static(__dirname + '/'));
 
 

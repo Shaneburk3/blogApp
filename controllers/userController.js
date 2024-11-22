@@ -7,14 +7,15 @@ exports.register = (req, res) => {
         console.log('User created: ', req.body);
         res.redirect('/login');
     });
+
 };
 
 exports.login = (req, res) => {
     const {username, password} = req.body; 
-    console.log('User:', req.body)
+    console.log('Username:', req.body)
     User.findByUsername(username, (err, user) => {
         if (err) {
-            return res.send('Error.');
+            return res.send('Error.', err.message);
         } else if (!user) {
             return res.send('User not found.');
         } else if (user.password !== password) {

@@ -3,8 +3,8 @@ const db =  new sqlite3.Database('database.db');
 const path = require('path');
 
 const dbPath = path.resolve(__dirname, './database.db');
-let admin_user = 'admin'
-let user_user = 'user'
+//let admin_user = 'admin'
+//let user_user = 'user'
 
 
 

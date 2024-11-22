@@ -29,7 +29,7 @@ npm install express-session
 npm install body-parser
 npm install sqlite3
 npm install playwright
-npx install nodemon
+
 
 ## Start Application
 
