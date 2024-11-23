@@ -21,8 +21,8 @@
     <% blogs.forEach(blog => { %>
     <div  id="blog_card" class="card">
         <div class="card-body">
-            <h5 class="card-title"><%=blog.title%></h5>
-            <p class="card-text"><%= blog.body %></p>
+            <h5 class="card-title"><%-blog.title%></h5>
+            <p class="card-text"><%- blog.body %></p>
             <a href="/blogs/<%= blog.id%>" class="card-link">blog link</a>
         </div>
         <!-- Update blog  -->

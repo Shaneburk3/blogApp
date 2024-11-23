@@ -21,10 +21,10 @@ db.serialize(() => {
     //db.run('DELETE FROM users WHERE username = (?)', [admin_user]);
 
     //Mock data
-    //db.run('INSERT INTO users (first_name, last_name, username, email, password) VALUES (?,?,?,?,?)', ["admin", "admin", "admin", "admin@email.com", "123"]);
+    db.run('INSERT INTO users (first_name, last_name, username, email, password) VALUES (?,?,?,?,?)', ["admin", "admin", "admin", "admin@email.com", "password"]);
     //db.run('INSERT INTO users (first_name, last_name, username, email, password) VALUES (?,?,?,?,?)', ["user", "user", "user", "user@email.com", "123"]);
     //Mock data
-    //db.run('INSERT INTO blogs (title, body, user_id) VALUES (?,?,?)', ["my first blog", "body", 1])
+    db.run('INSERT INTO blogs (title, body, user_id) VALUES (?,?,?)', ["my secret blog", "body", 1])
     });
 
 module.exports = db;
