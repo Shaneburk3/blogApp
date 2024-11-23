@@ -43,10 +43,8 @@ npx playwright install
 npm test
 npx playwright test tests/register.spec.js
 npx playwright test tests/login.spec.js
-
-
-npx playwright test tests/register.spec.js
-npx playwright test tests/login.spec.js
+npx playwright test tests/xss_Attack.spec.js
+npx playwright test tests/createBlog.spec.js
 
 ## Start Application
 

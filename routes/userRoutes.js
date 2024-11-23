@@ -10,7 +10,7 @@ router.get('/register', (req, res) => res.render('users/register', { errors: nul
 router.post('/register', [
     body('first_name').notEmpty().escape(),
     body('last_name').notEmpty().escape(),
-    body('username').notEmpty().escape(),
+    body('username').notEmpty().escape().withMessage('can not input special characters.'),
     body('email').isEmail().withMessage('Must be an email.').escape(),
     body('password').isLength({ min: 6 }).withMessage('Must be min 6 chars.').isLength({ max: 70 }).withMessage("Too Long.")], userController.registerValidate);
 
