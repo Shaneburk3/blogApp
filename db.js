@@ -1,18 +1,19 @@
 const sqlite3 = require('sqlite3').verbose();
-const db =  new sqlite3.Database('database.db');
+const db = new sqlite3.Database('database.db');
 const path = require('path');
 
 //const dbPath = path.resolve(__dirname, './database.db');
 let admin_user = 'admin'
 
 
+// Run these SQL commands when db starts.
 db.serialize(() => {
 
     //clear all entries.
     db.run('DROP TABLE IF EXISTS users');
     db.run('DROP TABLE IF EXISTS blogs');
 
-    db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, first_name TEXT NOT NULL, last_name TEXT NOT NULL, username TEXT UNIQUE NOT NULL, email TEXT NOT NULL, password TEXT NOT NULL, role TEXT DEFAULT' + 'user'+' )');
+    db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, first_name TEXT NOT NULL, last_name TEXT NOT NULL, username TEXT UNIQUE NOT NULL, email TEXT NOT NULL, password TEXT NOT NULL, role TEXT DEFAULT' + 'user' + ' )');
 
     db.run('CREATE TABLE IF NOT EXISTS blogs (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT null, body TEXT NOT null, user_id INTEGER NOT NULL, FOREIGN KEY (user_id) REFERENCES users (id))');
 

@@ -41,6 +41,9 @@ npx playwright install
 ## RUN TESTS 
 
 npm test
+npx playwright test tests/register.spec.js
+npx playwright test tests/login.spec.js
+
 
 npx playwright test tests/register.spec.js
 npx playwright test tests/login.spec.js

@@ -12,7 +12,7 @@ const Blog = {
         db.all('SELECT * FROM blogs WHERE user_id = ?', [userId], callback);
     },
     update: (id, data, callback) => {
-        const {title, body} = data;
+        const { title, body } = data;
         db.run('UPDATE blogs SET title = ?, body = ? WHERE id = ?', [title, body, id], callback);
     },
     delete: (id, callback) => {

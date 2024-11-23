@@ -3,7 +3,7 @@ const db = require('../db');
 
 exports.renderBlogs = (req, res) => {
   const userId = req.session.userId;
-  if(!userId) {
+  if (!userId) {
     console.log('no session id sent.')
     return res.redirect('/login');
   }
@@ -13,7 +13,7 @@ exports.renderBlogs = (req, res) => {
       return res.status(500).send('error loading users blogs.');
     }
     //success
-    res.render('blogs', {blogs, user_id: req.session.userId });
+    res.render('blogs', { blogs, user_id: req.session.userId });
   })
 }
 
@@ -27,19 +27,19 @@ exports.getAllBlogs = (req, res) => {
 */
 exports.createBlog = (req, res) => {
   let userId = req.session.userId;
-  
-  if(!userId){
+
+  if (!userId) {
     console.log('No active session.')
     return res.redirect('/login');
   }
   const { title, body } = req.body;
-  console.log("Creating new blog:", "Title:",title, "Body:", body, "user id:",userId);
+  console.log("Creating new blog:", "Title:", title, "Body:", body, "user id:", userId);
   Blog.create(title, body, userId, (err) => {
-    if (err) { 
+    if (err) {
       return res.send(err);
-  }
-  console.log('Blog Created.')
-  res.redirect('/blogs');
+    }
+    console.log('Blog Created.')
+    res.redirect('/blogs');
   });
 };
 
@@ -58,7 +58,7 @@ exports.updateBlog = (req, res) => {
 };
 
 exports.deleteBlog = (req, res) => {
-  const {id, title} = req.body
+  const { id, title } = req.body
   Blog.delete(id, (err) => {
     console.log('Deleting blog with id:', id)
     if (err) return res.send('Could not delete blog');
