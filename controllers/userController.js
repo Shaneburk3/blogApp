@@ -1,8 +1,9 @@
 const User = require('../models/userModel');
-const db = require('../db');
+//const db = require('../db');
 const { validationResult } = require('express-validator');
 const enCrypt = require('bcrypt');
-const { emit } = require('node:process');
+//const { emit } = require('node:process');
+
 exports.register = (req, res) => { res.render('register', { errors: null }); };
 
 exports.registerValidate = async (req, res) => {
@@ -10,12 +11,13 @@ exports.registerValidate = async (req, res) => {
     const errors = validationResult(req);
     //check all errors.
     console.log(errors.array());;
+    //if validator finds error, redirect back to register.
     if (!errors.isEmpty()) { return res.render('register', { errors: errors.array() }); }
     const { first_name, last_name, username, email, password, passwordTwo } = req.body;
-    //hash user password, with salt.
     if (password !== passwordTwo) {
         return res.send('Passwords do not match.');
     }
+    //hash user password, with salt.
     const hashedPword = await enCrypt.hash(password, 10)
     console.log('hashed password: ', hashedPword, username)
     User.create(first_name, last_name, username, email, hashedPword, (err) => {
