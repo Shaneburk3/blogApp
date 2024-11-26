@@ -1,18 +1,23 @@
 const Blog = require('../models/blogModel');
 const db = require('../db');
+const { validationResult } = require('express-validator');
+
 
 exports.renderBlogs = (req, res) => {
+  const errors = validationResult(req);
+
   const userId = req.session.userId;
   if (!userId) {
-    console.log('no session id sent.')
+    console.log('[ERROR]: no session id sent.')
     return res.redirect('/login');
   }
   Blog.findAll(userId, (err, blogs) => {
     if (err) {
-      console.log('error retreiving blogs', err.message);
+      console.log(`[ERROR]: Could not retrieve blog:`, err.message);
       return res.status(500).send('error loading users blogs.');
     }
     //success
+    console.log(`[INFO]: Blogs retrieved for user with ID: ${userId}`)
     res.render('blogs', { blogs, user_id: req.session.userId });
   })
 }
@@ -26,31 +31,46 @@ exports.getAllBlogs = (req, res) => {
 };
 */
 exports.createBlog = (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) { 
+    console.log('[SECURITY]: Create Validation Errors:', errors.array());
+    return res.render('blogs', { errors: errors.array() }); }
   let userId = req.session.userId;
 
   if (!userId) {
-    console.log('No active session.')
+    console.log('[ERROR]: No active session, cannot create blog.')
     return res.redirect('/login');
   }
   const { title, body } = req.body;
-  console.log("Creating new blog:", "Title:", title, "Body:", body, "user id:", userId);
   Blog.create(title, body, userId, (err) => {
+    const errors = validationResult(req);
+  if (!errors.isEmpty()) { 
+    console.log('[SECURITY]: Create Validation Errors:', errors.array());
+    return res.render('[INFO] Creare blog errors:', { errors: errors.array() }); }
     if (err) {
+      console.log(`[ERROR]: Cannot create blog: ${title}`)
       return res.send(err);
     }
-    console.log('Blog Created.')
+    console.log('[INFO]: Blog Created.')
     res.redirect('/blogs');
   });
 };
 
 exports.getBlog = (req, res) => {
   Blog.findById(req.params.id, (err, blog) => {
-    if (err || !blog) return res.send('blog not found.');
+    if (err || !blog) {
+      console.log(`[ERROR]: Cannot get blogs for ID: ${req.params.id}`)
+      return res.send('blog not found.');
+    }  
     res.render('/blog');
   })
 }
 
 exports.updateBlog = (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) { 
+    console.log('[SECURITY]: Update Request Validation Errors:', errors.array());
+    return res.render('blogs', { errors: errors.array() }); }
   Blog.update(req.params, req.body, (err) => {
     if (err) return res.send('error updating blog.');
     res.redirect('/blogs');

@@ -27,9 +27,9 @@ app.use(bodyParser.json());
 //connect to db
 const db = new sqlite3.Database('./database.db', sqlite3.OPEN_READWRITE, (err) => {
     if (err) {
-        console.log('Error: ', err.message)
+        console.log('[ERROR]: Could not connect to database: ', err.message)
     } else {
-        console.log('Connected to DB.')
+        console.log('[INFO]: Connected to database.')
     }
 });
 
