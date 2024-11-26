@@ -3,6 +3,7 @@ const db = require('../db');
 const { validationResult } = require('express-validator');
 
 
+//if there is a valid session key, blogModel is called to get all blogs with user ID.
 exports.renderBlogs = (req, res) => {
   const errors = validationResult(req);
 
@@ -22,14 +23,7 @@ exports.renderBlogs = (req, res) => {
   })
 }
 
-/*
-exports.getAllBlogs = (req, res) => {
-  Blog.findAll((err, blogs) => {
-    if (err) return res.send('Error getting blogs');
-    res.render('/blogs,', {blogs});
-  });
-};
-*/
+//Validator checks new blog, if OK, blog is created.
 exports.createBlog = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) { 

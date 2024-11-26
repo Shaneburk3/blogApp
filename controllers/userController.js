@@ -2,10 +2,10 @@ const User = require('../models/userModel');
 //const db = require('../db');
 const { validationResult } = require('express-validator');
 const enCrypt = require('bcrypt');
-//const { emit } = require('node:process');
 
 exports.register = (req, res) => { res.render('register', { errors: null }); };
 
+//register request from user starts here, if successfull, runs User.create.
 exports.registerValidate = async (req, res) => {
     //use validator on request sent from user.
     const errors = validationResult(req);
@@ -28,6 +28,8 @@ exports.registerValidate = async (req, res) => {
 
 exports.login = (req, res) => { res.render('login', { errors: null }); };
 
+// If inputs are valid, controller runs User.findByUsername, then redirects to blogs. 
+//Blogs open checking DB for blogs with users ID
 exports.loginValidate = async (req, res) => {
     const { username, password } = req.body;
     console.log('[INFO]: Validating User log in:', username);

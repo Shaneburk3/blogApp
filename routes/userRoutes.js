@@ -7,6 +7,7 @@ const { body } = require('express-validator');
 //get register, send message that will be altered to display an error when registering.
 router.get('/register', (req, res) => res.render('users/register', { errors: null }));
 
+// POST Method utilitizes validator, sends req to registerValidator.
 router.post('/register', [ body('first_name').notEmpty().escape().withMessage('can not input special characters.'),
     body('last_name').notEmpty().escape().withMessage('can not input special characters.'),
     body('username').notEmpty().escape().withMessage('can not input special characters.'),
@@ -15,6 +16,7 @@ router.post('/register', [ body('first_name').notEmpty().escape().withMessage('c
 
 router.get('/login', (req, res) => res.render('users/login', { errors: null }));
 
+// POST Method utilitizes validator, sends req to loginValidator.
 router.post('/login', [body('username').escape().isLength({ max: 20 }),
 body('password').isLength({ min: 6 }).withMessage('Must be min 6 chars.').isLength({ max: 70 }).withMessage("Too Long.")
 ], userController.loginValidate);

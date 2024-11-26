@@ -36,19 +36,15 @@ const db = new sqlite3.Database('./database.db', sqlite3.OPEN_READWRITE, (err) =
 //export DB connection to use in other files.
 module.exports = db;
 
-//routes to blog and user.
-//const blogRouter = require('./routes/blogRoutes');
-//const userRouter = require('./routes/userRoutes');
-
+//server running on:  http://127.0.0.1:3000/
 app.listen(3000);
 
 app.set('view engine', 'ejs');
 
-
+// set routes to the defined routes in the routing folder,
 const userRoutes = require('../blogApp/routes/userRoutes');
 const blogRoutes = require('../blogApp/routes/blogRoutes');
 
-// set routes as the routes folder route
 app.use('/users', userRoutes);
 app.use('/blogs', blogRoutes);
 
