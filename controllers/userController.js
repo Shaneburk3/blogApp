@@ -3,6 +3,9 @@ const User = require('../models/userModel');
 const { validationResult } = require('express-validator');
 const enCrypt = require('bcrypt');
 
+const type_error = "ERROR";
+const type_info = "INFO";
+
 exports.register = (req, res) => { res.render('register', { errors: null }); };
 
 //register request from user starts here, if successfull, runs User.create.
@@ -42,11 +45,14 @@ exports.loginValidate = async (req, res) => {
     // Find user
     User.findByUsername(username, async (err, user) => {
         if (err) {
+            User.failed_logins(type_error, username, password, message);
             console.log('[ERROR]: Could not find user.');
             return res.send('Error.', err.message);
         } else if (!user) {
+            const message = "User not found.";
+            User.failed_logins(type_error, username, password, message);
             console.log('[ERROR]: User does not exist.');
-            return res.send('User not found.');
+            return res.redirect('/login');
         }
         //compare hashed password against user entry:
         console.log(`[INFO]: checking password: entered: ${password}`)
@@ -54,11 +60,16 @@ exports.loginValidate = async (req, res) => {
         // if credentials matched, user will be signed in.
         if (checked) {
             const session_id = req.session.userId = user.id;
-            console.log('[INFO]: User logged in, user:', user.username)
-            console.log('[INFO] Session ID:', session_id);
+            const message = "User logged in";
+            User.success_logins(type_info, session_id, user.username, user.password, message)
+            //console.log('[INFO]: User logged in, user:', user.username)
+            //console.log('[INFO] Session ID:', session_id);
             res.redirect('/blogs');
         } else {
-            return res.send('[ERROR]: Invalid password entered.');
+            const message = "[ERROR] Incorrect Password";
+            User.failed_logins(type_error, username, password, message);
+            //console.log('[ERROR]: Incorrect Password.');
+            return res.redirect('/login');
         }
     });
 };

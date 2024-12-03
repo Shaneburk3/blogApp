@@ -12,10 +12,22 @@ db.serialize(() => {
     //clear all entries.
     db.run('DROP TABLE IF EXISTS users');
     db.run('DROP TABLE IF EXISTS blogs');
+    db.run('DROP TABLE IF EXISTS failed_logins');
+    db.run('DROP TABLE IF EXISTS success_logins');
 
     db.run('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, first_name TEXT NOT NULL, last_name TEXT NOT NULL, username TEXT UNIQUE NOT NULL, email TEXT NOT NULL, password TEXT NOT NULL, role TEXT DEFAULT' + 'user' + ' )');
 
     db.run('CREATE TABLE IF NOT EXISTS blogs (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT null, body TEXT NOT null, user_id INTEGER NOT NULL, FOREIGN KEY (user_id) REFERENCES users (id))');
+
+    //LOG for failed sign in attempts
+    db.run('CREATE TABLE IF NOT EXISTS failed_logins (type, id INTEGER PRIMARY KEY AUTOINCREMENT, username_entered, password_entered, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, message TEXT)');
+
+    //LOG for successful sign in attempts
+    db.run('CREATE TABLE IF NOT EXISTS success_logins (type, id INTEGER PRIMARY KEY AUTOINCREMENT, session_id, username, password, timestamp DATETIME DEFAULT CURRENT_TIMESTAMP, message TEXT)');
+
+    //LOG for blog posts
+  
+
 
     db.run('DELETE FROM users WHERE username = (?)', [admin_user]);
     //hashed password: Password12

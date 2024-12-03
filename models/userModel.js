@@ -9,6 +9,12 @@ const User = {
     findByUsername: (username, callback) => {
         db.get('SELECT * FROM users WHERE username = ?', [username], callback);
     },
+    failed_logins: (type, username_entered, password_entered, message, callback) => {
+        db.run('INSERT INTO failed_logins (type, username_entered, password_entered, message) VALUES (?,?,?,?)', [type, username_entered, password_entered, message], callback);
+    },
+    success_logins: (type, session_id, username, password, message, callback) => {
+        db.run('INSERT INTO success_logins (type, session_id, username, password, message) VALUES (?,?,?,?,?)', [type, session_id, username, password, message], callback);
+    },
 };
 
 module.exports = User;
