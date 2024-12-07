@@ -18,6 +18,12 @@ app.use(session({
 //directory.
 app.use(express.static(__dirname + '/'));
 
+app.use((req, res, next) => {
+   res.setHeader("Content-Security-Policy", "default-src', 'self'");
+   res.setHeader("X-XSS-Protection", "1; mode=block"); 
+   next();
+});
+
 
 // parse application 
 app.use(bodyParser.urlencoded({ extended: false }));
