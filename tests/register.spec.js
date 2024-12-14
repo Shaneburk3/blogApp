@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+const { test, expect } = require('@playwright/test');
 
 test('User can register.', async ({ page }) => {
     await page.goto('http://localhost:3000/register');

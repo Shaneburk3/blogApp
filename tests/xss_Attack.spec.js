@@ -1,5 +1,5 @@
-//const { test, expect } = require('@playwright/test');
 import { test, expect } from '@playwright/test';
+const { test, expect } = require('@playwright/test');
 
 test('XSS Script attempt', async ({ page }) => {
     await page.goto('http://localhost:3000/login');
