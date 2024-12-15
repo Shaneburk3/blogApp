@@ -6,7 +6,7 @@ const { body } = require('express-validator');
 
 //get register, send message that will be altered to display an error when registering.
 router.get('/register', (req, res) => res.render('users/register', { errors: null }));
-
+ 
 // POST Method utilitizes validator, sends req to registerValidator.
 router.post('/register', [ body('first_name').notEmpty().escape().withMessage('can not input special characters.'),
     body('last_name').notEmpty().escape().withMessage('can not input special characters.'),

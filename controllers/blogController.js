@@ -12,7 +12,7 @@ exports.renderBlogs = (req, res) => {
     console.log('[ERROR]: no session id sent.')
     return res.redirect('/login');
   }
-  Blog.findAll(userId, (err, blogs) => {
+  Blog.findById(userId, (err, blogs) => {
     if (err) {
       console.log(`[ERROR]: Could not retrieve blog:`, err.message);
       return res.status(500).send('error loading users blogs.');
@@ -23,8 +23,8 @@ exports.renderBlogs = (req, res) => {
   })
 }
 
-//Validator checks new blog, if OK, blog is created.
 exports.createBlog = (req, res) => {
+  //Validator checks new blog, if OK, blog is created.
   const errors = validationResult(req);
   if (!errors.isEmpty()) { 
     console.log('[SECURITY]: Create Validation Errors:', errors.array());
@@ -37,6 +37,7 @@ exports.createBlog = (req, res) => {
   }
   const { title, body } = req.body;
   Blog.create(title, body, userId, (err) => {
+    //Validator checks new blog, if OK, blog is created.
     const errors = validationResult(req);
   if (!errors.isEmpty()) { 
     console.log('[SECURITY]: Create Validation Errors:', errors.array());
