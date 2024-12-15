@@ -9,5 +9,6 @@ test('Create a new blog', async ({ page }) => {
     await page.fill('input[name="title"]', 'Test Title');
     await page.fill('textarea[name="body"]', 'Test Body');
     await page.click('button[type="submit"]');
-    await expect(page.locator('text=Test Title')).toBeVisible();
+    await expect(page).toHaveURL('http://localhost:3000/blogs');
+    await expect(page.locator('h5:has-text("Test Title")')).toBeVisible();
 });
